@@ -137,7 +137,7 @@ class FoodsTableSeeder extends Seeder
                 'description' => 'Sweet and chewy rice dumplings served with a syrupy sauce.',
                 'price' => 5.00,
                 'image' => 'images/foods/danggo.jpg',
-                'category_id' => 3,  // Changed category_id to 3
+                'category_id' => 3,  
                 'rating' => 4.7,
                 'created_at' => now(),
                 'updated_at' => now(),
