@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Authentication Routes
-Route::post('login', [AuthController::class, 'login']); // Login
+Route::post('login', [AuthController::class, 'login'])->name('login'); // Login
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']); // Logout
 
 // User Routes (admin-only or authorized)

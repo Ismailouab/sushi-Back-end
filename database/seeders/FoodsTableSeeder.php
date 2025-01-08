@@ -17,7 +17,7 @@ class FoodsTableSeeder extends Seeder
             [
                 'description' => 'A delicious California roll with crab, avocado, and cucumber.',
                 'price' => 10.99,
-                'image' => 'images/foods/california_roll.jpg',
+                'image' => 'public/assets/sushi-2.png',
                 'category_id' => 1,
                 'rating' => 4.5,
                 'created_at' => now(),
@@ -30,7 +30,7 @@ class FoodsTableSeeder extends Seeder
             [
                 'description' => 'Fresh nigiri sushi with tuna and salmon.',
                 'price' => 12.99,
-                'image' => 'images/foods/sushi_nigiri.jpg',
+                'image' => 'public/assets/sushi-2.png',
                 'category_id' => 1,
                 'rating' => 4.8,
                 'created_at' => now(),
@@ -43,7 +43,7 @@ class FoodsTableSeeder extends Seeder
             [
                 'description' => 'Refreshing Japanese green tea.',
                 'price' => 3.50,
-                'image' => 'images/foods/green_tea.jpg',
+                'image' => 'public/assets/sushi-4.png',
                 'category_id' => 2,
                 'rating' => 4.2,
                 'created_at' => now(),
@@ -56,7 +56,7 @@ class FoodsTableSeeder extends Seeder
             [
                 'description' => 'Chilled soda served with ice.',
                 'price' => 2.50,
-                'image' => 'images/foods/soda.jpg',
+                'image' => 'public/assets/soda.png',
                 'category_id' => 2,
                 'rating' => 4.0,
                 'created_at' => now(),
@@ -69,7 +69,7 @@ class FoodsTableSeeder extends Seeder
             [
                 'description' => 'Spicy tuna wrapped in seaweed and rice.',
                 'price' => 14.50,
-                'image' => 'images/foods/spicy_tuna_roll.jpg',
+                'image' => 'public/assets/sushi-5.png',
                 'category_id' => 1,
                 'rating' => 4.7,
                 'created_at' => now(),
@@ -83,7 +83,7 @@ class FoodsTableSeeder extends Seeder
             [
                 'description' => 'Authentic sushi with a variety of fresh fish and ingredients.',
                 'price' => 15.99,
-                'image' => 'images/foods/original_sushi.jpg',
+                'image' => 'public/assets/sushi-9.png',
                 'category_id' => 1,
                 'rating' => 4.9,
                 'created_at' => now(),
@@ -96,7 +96,7 @@ class FoodsTableSeeder extends Seeder
             [
                 'description' => 'Sushi with a twist of creamy cheese and fresh fish.',
                 'price' => 16.50,
-                'image' => 'images/foods/chezu_sushi.jpg',
+                'image' => 'public/assets/sushi-12.png',
                 'category_id' => 1,
                 'rating' => 4.3,
                 'created_at' => now(),
@@ -110,7 +110,7 @@ class FoodsTableSeeder extends Seeder
             [
                 'description' => 'A hearty bowl of ramen with a rich broth and tender pork belly.',
                 'price' => 13.99,
-                'image' => 'images/foods/ramen_legendo.jpg',
+                'image' => 'public/assets/sushi-10.png',
                 'category_id' => 3,  // Changed category_id to 3
                 'rating' => 4.6,
                 'created_at' => now(),
@@ -123,7 +123,7 @@ class FoodsTableSeeder extends Seeder
             [
                 'description' => 'A warm, comforting bowl of udon noodles in a savory broth.',
                 'price' => 11.50,
-                'image' => 'images/foods/udon.jpg',
+                'image' => 'public/assets/sushi-7.png',
                 'category_id' => 3,  // Changed category_id to 3
                 'rating' => 4.4,
                 'created_at' => now(),
@@ -136,7 +136,7 @@ class FoodsTableSeeder extends Seeder
             [
                 'description' => 'Sweet and chewy rice dumplings served with a syrupy sauce.',
                 'price' => 5.00,
-                'image' => 'images/foods/danggo.jpg',
+                'image' => 'public/assets/sushi-6.png',
                 'category_id' => 3,  
                 'rating' => 4.7,
                 'created_at' => now(),
@@ -149,7 +149,19 @@ class FoodsTableSeeder extends Seeder
             [
                 'description' => 'Freshly made sushi with an assortment of seafood.',
                 'price' => 12.00,
-                'image' => 'images/foods/sushi.jpg',
+                'image' => 'public/assets/sushi-11.png',
+                'category_id' => 1,
+                'rating' => 4.8,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        );
+        DB::table('foods')->updateOrInsert(
+            ['name' => 'tuna'],
+            [
+                'description' => 'Premium grade tuna, known for its rich flavor and vibrant red color.',
+                'price' => 12.00,
+                'image' => 'public/assets/sushi-3.png',
                 'category_id' => 1,
                 'rating' => 4.8,
                 'created_at' => now(),

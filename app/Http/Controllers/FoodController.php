@@ -10,12 +10,17 @@ class FoodController extends Controller
     // for converting the data to json format
     public function index(){
         
-        return Food::all();
+        $foods = Food::all();
+        return response()->json($foods);
     }
     // for showing the data using id
     public function show($id){
         
-        return Food::findOrFail($id);
+        $food = Food::find($id);
+        if ($food) {
+            return response()->json($food);
+        }
+        return response()->json(['message' => 'Food not found'], 404);
     }
     // for storing the data
     public function store(Request $request){
