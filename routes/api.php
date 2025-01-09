@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 // Authentication Routes
+Route::post('register', [AuthController::class, 'register']); // Register a new user
 Route::post('login', [AuthController::class, 'login'])->name('login'); // Login
 Route::middleware('auth:sanctum')->post('logout', [AuthController::class, 'logout']); // Logout
 

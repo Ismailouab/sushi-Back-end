@@ -21,9 +21,13 @@ class CategoryController extends Controller
         return response()->json($category, 201);
     }
     // for showing the data
-    public function show(Category $category){
-
-        return response()->json($category);
+    public function show($id){
+            
+        $category = Category::find($id);
+        if ($category) {
+            return response()->json($category);
+        }
+        return response()->json(['message' => 'Category not found'], 404);
     }
     // for updating the data
     public function update(Request $request, Category $category){
