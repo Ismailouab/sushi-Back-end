@@ -14,4 +14,14 @@ class Food extends Model
     {
         return $this->belongsTo(Category::class);
     }
+    public function order(){
+
+        return $this->belongsToMany(Order::class, 'food_order')  // Specify pivot table
+                ->withPivot('quantity', 'total_price')  // Include pivot data
+                ->withTimestamps();  // Include timestamps from the pivot table
+    }
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }

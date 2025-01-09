@@ -29,12 +29,7 @@ class AuthController extends Controller{
         return response()->json(['token' => $token], 200);
     }
 
-    public function logout(Request $request){
-        // Revoke the token that was used to authenticate the current request...
-        $request->user()->currentAccessToken()->delete();
-        return response()->json(['message' => 'Token deleted'], 200);
-    }
-
+   
     public function register(Request $request){
         // Validate the incoming request
         $request->validate([
@@ -65,6 +60,11 @@ class AuthController extends Controller{
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json(['token' => $token], 201);  // Return the token as a response
+    }
+    public function logout(Request $request){
+            // Revoke the token that was used to authenticate the current request...
+            $request->user()->currentAccessToken()->delete();
+            return response()->json(['message' => 'Token deleted'], 200);
     }
 
 }

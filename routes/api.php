@@ -37,9 +37,10 @@ Route::middleware('auth:sanctum')->delete('foods/{id}', [FoodController::class, 
 // Order Routes
 Route::get('orders', [OrderController::class, 'index']); // Get all orders
 Route::get('orders/{id}', [OrderController::class, 'show']); // Get a specific order
-Route::middleware('auth:sanctum')->post('orders', [OrderController::class, 'store']); // Create a new order
-Route::middleware('auth:sanctum')->put('orders/{id}', [OrderController::class, 'update']); // Update an order
-Route::middleware('auth:sanctum')->delete('orders/{id}', [OrderController::class, 'destroy']); // Delete an order
+Route::middleware('auth:sanctum')->get('/users/{userId}/orders', [OrderController::class, 'getOrdersByUserId']); // Get orders by user ID
+Route::middleware('auth:sanctum')->post('/users/{userId}/orders', [OrderController::class, 'store']); // Create a new order
+Route::middleware('auth:sanctum')->put('/users/{userId}/orders/{id}', [OrderController::class, 'update']); // Update an order
+Route::middleware('auth:sanctum')->delete('/users/{userId}/orders/{id}', [OrderController::class, 'destroy']); // Delete an order
 
 // Get authenticated user (for testing purposes)
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

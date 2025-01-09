@@ -9,7 +9,7 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'food_id', 'quantity', 'total_price', 'status'];
+    protected $fillable = ['user_id', 'total_price', 'status'];
 
     public function users()
     {
@@ -18,7 +18,16 @@ class Order extends Model
 
     public function food()
     {
-        return $this->belongsTo(Food::class);
+        return $this->belongsToMany(Food::class, 'food_order')
+                ->withPivot('quantity', 'total_price' )
+                ->withTimestamps();
     }
+    
+    
+    public function orderItems(){
+
+        return $this->hasMany(OrderItem::class);  
+    }
+
 }
 
