@@ -26,41 +26,93 @@ class AuthController extends Controller{
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['token' => $token], 200);
+        return response()->json([
+            'token' => $token,
+            'user' => [
+                'id' => $user->id,
+                'name' => $user->name,
+                'email' => $user->email,
+                'role_id' => $user->role_id,
+            ]
+        ], 200);
+        
     }
 
    
-    public function register(Request $request){
+    // public function register(Request $request){
+    //     // Validate the incoming request
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'email' => 'required|email|unique:users,email',
+    //         'password' => 'required|string|min:8|confirmed', 
+    //     ]);
+
+    //      // Fetch the 'client' role by name
+    //     $role = Role::where('name', 'client')->first();  
+
+    //     if (!$role) {
+    //         return response()->json(['error' => 'Role not found'], 400);
+    //     }
+
+    //     // Create the user
+    //     $user = Users::create([
+    //         'name' => $request->name,
+    //         'email' => $request->email,
+    //         'password' => Hash::make($request->password),  
+    //     ]);
+
+    //      // Assign the 'client' role to the user
+    //     $user->role()->associate($role);
+    //     $user->save();
+
+    //     // Generate a token for the user
+    //     $token = $user->createToken('auth_token')->plainTextToken;
+
+    //     return response()->json(['token' => $token], 201);  // Return the token as a response
+    // }
+    public function register(Request $request)
+{
+    try {
         // Validate the incoming request
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:8|confirmed', 
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
-         // Fetch the 'client' role by name
-        $role = Role::where('name', 'client')->first();  
+        // Fetch the 'client' role by name
+        $role = Role::where('name', 'client')->first();
 
+        // Check if the role exists, if not return an error
         if (!$role) {
             return response()->json(['error' => 'Role not found'], 400);
         }
 
-        // Create the user
+        // Create the user and catch any errors related to database or validation
         $user = Users::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),  
+            'password' => Hash::make($request->password),
         ]);
 
-         // Assign the 'client' role to the user
+        // Assign the 'client' role to the user
         $user->role()->associate($role);
         $user->save();
 
         // Generate a token for the user
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        return response()->json(['token' => $token], 201);  // Return the token as a response
+        // Return the token as a response
+        return response()->json(['token' => $token], 201);
+    } catch (\Illuminate\Validation\ValidationException $e) {
+        // Handle validation errors (if validation fails)
+        return response()->json(['error' => $e->validator->errors()], 422);
+    } catch (\Exception $e) {
+        // Handle any other errors (e.g., database issues)
+        return response()->json(['error' => 'An error occurred: ' . $e->getMessage()], 500);
     }
+}
+
     public function logout(Request $request){
             // Revoke the token that was used to authenticate the current request...
             $request->user()->currentAccessToken()->delete();
